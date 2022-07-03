@@ -14,6 +14,17 @@ const apiKey = '6t5d478dpjeu';
 const chatClient = StreamChat.getInstance(apiKey);
 const authToken = cookies.get('token');
 
+if (authToken) {
+  chatClient.connectUser({
+    id: cookies.get('userId'),
+    name: cookies.get('username'),
+    fullName: cookies.get('fullName'),
+    image: cookies.get('avatarURL'),
+    hashedPassword: cookies.get('hashedPassword'),
+    phoneNumber: cookies.get('phoneNumber'),
+  }, authToken)
+}
+
 const theme = createTheme({
   palette: {
     primary: {
