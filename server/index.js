@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors')
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 
 require('dotenv').config();
 
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use('/', authRoute);
+app.use('/auth', authRoute);
 
 app.listen(PORT, (error) =>{
     if(!error)

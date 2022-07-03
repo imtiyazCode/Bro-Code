@@ -11,3 +11,8 @@ body {
 .App{
     height: 100%;
 }
+.auth_form-container_fields-content_button {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+}

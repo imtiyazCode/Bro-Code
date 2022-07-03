@@ -3,18 +3,21 @@ import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import { Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Cookies from 'universal-cookie'
 
 import './App.css';
-import { ChannelContainer, ChannelListContainer } from './Components'
+import { ChannelContainer, ChannelListContainer, Auth } from './Components'
 
-const chatClient = new StreamChat('your_api_key');
-const client = new StreamChat('your_api_key');
+const cookies = new Cookies();
+
+const apiKey = '6t5d478dpjeu';
+const chatClient = StreamChat.getInstance(apiKey);
+const authToken = cookies.get('token');
 
 const theme = createTheme({
-
   palette: {
     primary: {
-      main: '#0971f1',
+      main: '#005fff',
       darker: '#053e85',
     },
     neutral: {
@@ -28,10 +31,13 @@ const theme = createTheme({
 });
 
 const App = () => {
+
+  if(!authToken) return <Auth />
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App" >
-        <Chat client={client}>
+        <Chat client={chatClient}>
           <Grid container height='100%'>
             <Grid item xs={0} md='auto' height='100%'>
               <ChannelListContainer />
