@@ -11,3 +11,6 @@ body {
 .App{
     height: 100%;
 }
+.str-chat-channel.messaging .str-chat__main-panel {
+  padding: 0;
+}

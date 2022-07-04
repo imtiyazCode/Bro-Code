@@ -6,7 +6,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Cookies from 'universal-cookie'
 
 import './App.css';
-import { ChannelContainer, ChannelListContainer, Auth } from './Components'
+import 'stream-chat-react/dist/css/index.css'
+import { Auth, ChannelContainer, ChannelListContainer} from './Components'
 
 const cookies = new Cookies();
 
@@ -29,7 +30,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#005fff',
-      darker: '#053e85',
+      darker: '#003ea7',
     },
     neutral: {
       main: '#64748B',
@@ -43,11 +44,11 @@ const theme = createTheme({
 
 const App = () => {
 
-  if(!authToken) return <Auth />
+  if (!authToken) return <Auth />
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App" >
+    <div className="app_container" >
+      <ThemeProvider theme={theme}>
         <Chat client={chatClient}>
           <Grid container height='100%'>
             <Grid item xs={0} md='auto' height='100%'>
@@ -58,8 +59,8 @@ const App = () => {
             </Grid>
           </Grid>
         </Chat>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </div>
   );
 }
 
