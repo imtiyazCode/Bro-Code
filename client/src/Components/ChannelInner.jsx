@@ -83,10 +83,10 @@ const TeamChannelHeader = ({ setIsEditing }) => {
 
     return (
         <Box>
-            <AppBar position="static" sx={{boxShadow:'none', bgcolor:'#fff'}}>
+            <AppBar position="static" sx={{boxShadow:'none', bgcolor:'#fff', color:'#000',}}>
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        # {channel.data.name} <ChannelInfo />
+                        # {channel.data.name}
                     </Typography>
                     <Button color="inherit">{getWatcherText(watcher_count)}</Button>
                     <Button color="inherit"> <ChannelInfo /></Button>

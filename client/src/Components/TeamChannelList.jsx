@@ -1,36 +1,54 @@
-import React from 'react'
+import React from 'react';
+import { Box, styled, Typography } from '@mui/material';
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 
-const TeamChannelList = ({error=false, loading, children, type}) => {
+const HeaderTypography = styled(Typography)(() => ({
+    fontFamily: 'Helvetica Neue, sans - serif',
+    fontSize: '13px',
+    lineHeight: '16px',
+    height: '16px',
+    color: 'rgba(255, 255, 255, 0.66)'
+}))
+
+const ContainerBox = styled(Box)(() =>({
+    display:'flex',
+    flexDirection:'column',
+    width:'100%',
+    backgroundColor: '005fff'
+}))
+
+const TeamChannelList = ({ setToggleContainer, children, error = false, loading, type, isCreating, setIsCreating, setIsEditing, setCreateType }) => {
 
     if (error) {
         return type === 'team' ? (
-            <div className='team-channel-list'>
-                <p className="team-channel-list_message">
+            <ContainerBox >
+                <Typography variant="subtitle1" color={'#fff'}>
                     Connection error, please wait a moment and try again.
-                </p>
-            </div>
+                </Typography>
+            </ContainerBox>
         ) : null
     }
 
     if (loading) {
         return (
-            <div className='team-channel-list'>
-                <p className="team-channel-list_message loading">
+            <ContainerBox >
+                <Typography variant="subtitle1" color={'#fff'} height='115px'>
                     {type === 'team' ? 'Channels' : 'Messages'} loading...
-                </p>
-            </div>
+                </Typography>
+            </ContainerBox>
         )
     }
 
     return (
-        <div className='team-channel-list'>
-            <div className="team-channel-list_header">
-                <p className="team-channel-list_header_title">
+        <ContainerBox >
+            <Box display='flex' justifyContent='space-between' alignItems='center' padding='0 16px' margin='10px 0' >
+                <HeaderTypography>
                     {type === 'team' ? 'Channels' : ' Direct Messages'}
-                </p>
-            </div>
+                </HeaderTypography>
+                <AiOutlinePlusCircle color='#fff'/>
+            </Box>
             {children}
-        </div>
+        </ContainerBox>
     )
 }
 

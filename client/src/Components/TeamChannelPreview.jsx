@@ -1,32 +1,51 @@
 import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
+import { styled, Box } from '@mui/material';
 
-const TeamChannelPreview = ({type}) => {
+const PreviewBox = styled(Box)(() => ({
+    display: 'flex',
+    alignItems: 'center',
+    fontFamily: 'Helvetica Neue, sans-serif',
+    fontSize: '14px',
+    color: '#ffffff',
+    padding: '0px 20px',
+    height: '100%',
+    width: '100%',
+    textOverflow: 'ellipsis',
+    wordBreak: 'break-all',
+    marginRight:'12px' 
+}))
 
-    const { channel, client } = useChatContext();
+const TeamChannelPreview = ({channel, type }) => {
+    const { channel: activeChannel, client } = useChatContext();
 
     const ChannelPreview = () => (
-        <p className='channel-preview_item'>
-            # {channel?.data?.name || channel?.data?.id}
-        </p>
+        <PreviewBox>
+            <p># {channel?.data?.name || channel?.data?.id} </p>
+        </PreviewBox>
     );
 
     const DirectPreview = () => {
         const member = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
         return (
-            <div className="channel-preview_item single">
+            <PreviewBox>
                 <Avatar
                     image={member[0]?.user?.image}
                     name={member[0]?.user?.fullName}
                     size={24}
                 />
                 <p>{member[0]?.user?.fullName || member[0]?.user?.name || member[0]?.user?.first_name || member[0]?.user?.id}</p>
-            </div>
+            </PreviewBox>
         )
     }
 
     return (
-        <div>
+        <div className={
+            channel?.id === activeChannel?.id
+                ? 'channel-preview_container_selected'
+                : 'channel-preview_container'
+            }
+        >
             {type === "team" ? <ChannelPreview /> : <DirectPreview />}
         </div>
     )

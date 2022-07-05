@@ -11,6 +11,103 @@ body {
 .App{
     height: 100%;
 }
+
 .str-chat-channel.messaging .str-chat__main-panel {
   padding: 0;
+}
+.str-chat.messaging, .str-chat.commerce{
+  background-color: transparent !important;
+}
+.str-chat-channel.messaging .str-chat__main-panel {
+  padding: 0 !important;
+}
+
+.channel-list__container {
+  display: flex;
+  /* height: 800px; */
+  height: 100%;
+  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+.channel-list__container-responsive {
+  display: none;
+  height: 100%;
+  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 90%;
+  top: 0%;
+  z-index: 5;
+  transition: 0.8s ease;
+}
+.channel-list__header {
+  padding-left: 16px;
+  height: 62px;
+}
+.channel-list__header__text {
+  font-family: Helvetica Neue, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  color: #ffffff;
+}
+.channel-list__list__wrapper {
+  display: flex;
+  flex-direction: column;
+  background: var(--primary-color);
+  width: 240px;
+}
+@media screen and (max-width: 960px) {
+  .channel-list__container {
+    display: none;
+  }
+  .channel-list__list__wrapper {
+    width: 100%;
+  }
+  .channel-list__container-responsive {
+    display: flex;
+  }
+  .channel-list__container-toggle {
+    display: flex;
+  }
+}
+@media screen and (max-width: 650px) {
+  .channel-list__container-toggle {
+    right: -3%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .channel-preview_item.multi {
+    width: 150px;
+  }
+
+  .channel-list__container-toggle {
+    right: -5%;
+  }
+}
+
+.channel-preview_container {
+  height: 37px;
+  display: flex;
+  align-items: center;
+}
+.channel-preview_container_selected {
+  height: auto;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-weight: bold;
+  margin-right: 16px;
+  cursor: pointer;
+  z-index: 2;
+}
+.channel-preview_container:hover {
+  background: rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-weight: bold;
+  margin-right: 16px;
+  cursor: pointer;
 }

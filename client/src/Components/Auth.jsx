@@ -122,7 +122,7 @@ const Auth = () => {
                                 size='small'
                                 type="text"
                                 onChange={handleChange}
-                                name='userName'
+                                name='username'
                                 sx={{ width: '85%', margin: '13px 0' }}
                                 placeholder='User Name'
                             />

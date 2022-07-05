@@ -47,7 +47,7 @@ const App = () => {
   if (!authToken) return <Auth />
 
   return (
-    <div className="app_container" >
+    <div className="App" >
       <ThemeProvider theme={theme}>
         <Chat client={chatClient}>
           <Grid container height='100%'>
