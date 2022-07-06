@@ -1,14 +1,47 @@
-import React, { useState } from 'react';
-import { Box, TextField, InputAdornment } from '@mui/material'
+import React, { useState, useEffect } from 'react';
+import { Box, TextField, InputAdornment } from '@mui/material';
+import { useChatContext } from 'stream-chat-react';
 import { BsSearch } from 'react-icons/bs'
 
+import { ResultDropdown } from './'
 
 const ChannelSearch = () => {
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
+    
+    const [teamChannels, setTeamChannels] = useState([]);
+    const [directChannels, setDirectChannels] = useState([]);
 
-    const getChannel = (text) =>{
-        //TODO: fetch channel from stream server
+    const { client, setActiveChannel } = useChatContext();
+
+    useEffect(() => {
+        if(!query){
+            setTeamChannels([]);
+            setDirectChannels([]);
+        }
+    }, [query])
+
+    const getChannel = async(text) =>{
+        try {
+            const channelResponses = await client.queryChannels({
+                type: 'team',
+                name: {$autocomplete: text},
+                members: {$in: [client.userID]}
+            })
+            const userResponses = await client.queryUsers({
+                id: { $ne: client.userID },
+                name: { $autocomplete: text }
+            })
+            const [channels, { users }] = await Promise.all([channelResponses, userResponses]);
+
+            if (channels.length) setTeamChannels(channels);
+            if (users.length) setDirectChannels(users);
+
+            setLoading(false)
+
+        } catch (error) {
+            setQuery('')
+        }
     }
 
     const onSearch = (e) => {
@@ -17,6 +50,11 @@ const ChannelSearch = () => {
         setLoading(true);
         setQuery(e.target.value);
         getChannel(e.target.value);
+    }
+
+    const setChannel = (channel) => {
+        setQuery('');
+        setActiveChannel(channel);
     }
 
     return (
@@ -39,6 +77,13 @@ const ChannelSearch = () => {
                     }}
                 />
             </Box>
+            {query && (
+                <ResultDropdown
+                    teamChannels={teamChannels}
+                    directChannels={directChannels}
+                    loading={loading}
+                />
+            )}
         </div>
     )
 }
