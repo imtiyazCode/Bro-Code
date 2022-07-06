@@ -4,15 +4,15 @@ import { Box, styled, Modal } from '@mui/material';
 
 import { ChannelInner,CreateChannel, EditChannel } from './'
 
-
 const ChannelContainerWraper = styled(Box)(()=>({
   height: '100%',
   width:' 100%'
 }))
 
-const ChannelContainer = ({isCreating, setIsCreating, createType}) => {
+const ChannelContainer = ({isCreating, setIsCreating, createType,isEditing, setIsEditing}) => {
 
-  const handleClose = () => setIsCreating(false);
+  const handleCreateClose = () => setIsCreating(false);
+  const handleEditClose = () => setIsEditing(false);
 
   const EmptyState = () =>{
     <div className="channel-empty_container">
@@ -26,15 +26,27 @@ const ChannelContainer = ({isCreating, setIsCreating, createType}) => {
       <Channel EmptyStateIndicator={EmptyState}
         Message={(messageProps, i) => <MessageTeam key={i} {...messageProps} />}
       >
-        <ChannelInner />
+        <ChannelInner setIsEditing={setIsEditing} />
       </Channel>
+
+      {/*  Modal for Create Channel */}
       <Modal
         open={isCreating}
-        onClose={handleClose}
+        onClose={handleCreateClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <CreateChannel createType={createType} setIsCreating={setIsCreating} />
+      </Modal>
+
+      {/* modal for edit channel */}
+      <Modal
+        open={isEditing}
+        onClose={handleEditClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <EditChannel setIsEditing={setIsEditing} />
       </Modal>
     </ChannelContainerWraper>
   )

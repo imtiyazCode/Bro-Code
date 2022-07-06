@@ -66,6 +66,8 @@ const App = () => {
                 setIsCreating={setIsCreating}
                 isCreating={isCreating}
                 createType={createType}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
               />
             </Grid>
           </Grid>

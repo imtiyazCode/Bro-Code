@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { MessageList, MessageInput, Thread, Window, useChannelActionContext, Avatar, useChannelStateContext, useChatContext } from 'stream-chat-react';
 import { Box, Toolbar, AppBar, IconButton, Typography, Button } from '@mui/material'
 
-import { ChannelInfo } from '../assets';
+import { AiFillInfoCircle } from 'react-icons/ai'
 
 export const GiphyContext = React.createContext({});
 
-const ChannelInner = () => {
+const ChannelInner = ({ setIsEditing }) => {
     const [giphyState, setGiphyState] = useState(false);
     const { sendMessage } = useChannelActionContext();
 
@@ -33,7 +33,7 @@ const ChannelInner = () => {
         <GiphyContext.Provider value={{ giphyState, setGiphyState }}>
             <div style={{ display: 'flex', width: '100%' }}>
                 <Window>
-                    <TeamChannelHeader />
+                    <TeamChannelHeader setIsEditing={setIsEditing} />
                     <MessageList />
                     <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
                 </Window>
@@ -43,7 +43,7 @@ const ChannelInner = () => {
     );
 };
 
-const TeamChannelHeader = () => {
+const TeamChannelHeader = ({ setIsEditing }) => {
     const { channel, watcher_count } = useChannelStateContext();
     const { client } = useChatContext();
 
@@ -55,13 +55,16 @@ const TeamChannelHeader = () => {
     };
 
     const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
-    const additionalMembers = members.length - 3;
+
+    const handleClick = () => {
+        setIsEditing(true);
+    }
 
     if (channel.type === 'messaging') {
         return (
             <Box>
                 {members.map(({ user }, i) => (
-                    <AppBar position="static" sx={{bgcolor:'#fff', color:'#000', borderBottom:'1px solid #0000001a', boxShadow:'none'}} >
+                    <AppBar position="static" sx={{ bgcolor: '#fff', color: '#000', borderBottom: '1px solid #0000001a', boxShadow: 'none' }} >
                         <Toolbar>
                             <IconButton
                                 size="large"
@@ -71,7 +74,7 @@ const TeamChannelHeader = () => {
                                 <Avatar image={user.image} name={user.fullName || user.id} size={32} />
                             </IconButton>
                             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                                {user.fullName || user.name || user.first_name || user.id} 
+                                {user.fullName || user.name || user.first_name || user.id}
                             </Typography>
                             <Button color="inherit">{getWatcherText(watcher_count)}</Button>
                         </Toolbar>
@@ -83,13 +86,13 @@ const TeamChannelHeader = () => {
 
     return (
         <Box>
-            <AppBar position="static" sx={{boxShadow:'none', bgcolor:'#fff', color:'#000', borderBottom:'1px solid #0000001a'}}>
+            <AppBar position="static" sx={{ boxShadow: 'none', bgcolor: '#fff', color: '#000', borderBottom: '1px solid #0000001a' }}>
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         # {channel.data.name}
                     </Typography>
-                    <Button color="inherit">{getWatcherText(watcher_count)}</Button>
-                    <Button color="inherit"> <ChannelInfo /></Button>
+                    <Typography color="inherit">{getWatcherText(watcher_count)}</Typography>
+                    <Button color="inherit" onClick={handleClick}> <AiFillInfoCircle style={{ height: '25px', width: '25px' }} /></Button>
                 </Toolbar>
             </AppBar>
         </Box>

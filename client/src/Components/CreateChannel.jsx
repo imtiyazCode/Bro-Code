@@ -11,7 +11,6 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 500,
   bgcolor: 'background.paper',
   boxShadow: 24,
   borderRadius:5,
@@ -33,7 +32,6 @@ const buttonStyle = {
 const ChannelNameInputContainer = styled(Box)(() => ({
   display: 'flex',
   flexDirection: 'column',
-  height: '100px',
   padding: '20px',
 }))
 
@@ -104,7 +102,7 @@ const CreateChannel = ({ createType, setIsCreating }) => {
       <Box display='flex' flexDirection='column' height='100%'>
         <HeaderBox>
           <Typography>{createType === 'team' ? 'Create a New Channel' : 'Send Direct Message'}</Typography>
-          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer' }} />
+          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px' }} />
         </HeaderBox>
         {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />}
         <UserList setSelectedUsers={setSelectedUsers} />

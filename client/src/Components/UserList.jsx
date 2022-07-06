@@ -12,7 +12,7 @@ const UserListContainer = styled(Box)(() => ({
 const HeaderContainer = styled(Box)(() => ({
     display: 'flex',
     alignItems: 'center',
-    margin: '10px 20px',
+    padding: '0 20px',
     justifyContent: 'space-between',
 }))
 
