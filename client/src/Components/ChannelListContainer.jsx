@@ -4,12 +4,12 @@ import Cookies from 'universal-cookie';
 import { List, ListItem, ListItemAvatar, Avatar } from '@mui/material';
 
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
-import {FaLaptopCode} from 'react-icons/fa'
-import {FiLogOut} from 'react-icons/fi'
+import { FaLaptopCode } from 'react-icons/fa'
+import { FiLogOut } from 'react-icons/fi'
 
 const cookies = new Cookies();
 
-const Sidebar = () => (
+const Sidebar = ({ logout }) => (
     <List sx={{ width: '72px', bgcolor: '#0048c5', height: '100vh', padding: '0' }} >
         <ListItem sx={{ paddingTop: '12px' }}>
             <ListItemAvatar>
@@ -20,7 +20,7 @@ const Sidebar = () => (
         </ListItem>
         <ListItem>
             <ListItemAvatar>
-                <Avatar sx={{ bgcolor: '#ffffff', width: 44, height: 44, color: '#000', cursor: 'pointer' }}>
+                <Avatar sx={{ bgcolor: '#ffffff', width: 44, height: 44, color: '#000', cursor: 'pointer' }} onClick={logout}>
                     <FiLogOut />
                 </Avatar>
             </ListItemAvatar>

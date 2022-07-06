@@ -6,7 +6,7 @@ import { ChannelInfo } from '../assets';
 
 export const GiphyContext = React.createContext({});
 
-const ChannelInner = ({ setIsEditing }) => {
+const ChannelInner = () => {
     const [giphyState, setGiphyState] = useState(false);
     const { sendMessage } = useChannelActionContext();
 
@@ -31,19 +31,19 @@ const ChannelInner = ({ setIsEditing }) => {
 
     return (
         <GiphyContext.Provider value={{ giphyState, setGiphyState }}>
-            {/* <div style={{ display: 'flex', width: '100%' }}> */}
+            <div style={{ display: 'flex', width: '100%' }}>
                 <Window>
-                    <TeamChannelHeader setIsEditing={setIsEditing} />
+                    <TeamChannelHeader />
                     <MessageList />
-                    <MessageInput overrideSubmitHandler={overrideSubmitHandler} />
+                    <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
                 </Window>
                 <Thread />
-            {/* </div> */}
+            </div>
         </GiphyContext.Provider>
     );
 };
 
-const TeamChannelHeader = ({ setIsEditing }) => {
+const TeamChannelHeader = () => {
     const { channel, watcher_count } = useChannelStateContext();
     const { client } = useChatContext();
 
@@ -83,7 +83,7 @@ const TeamChannelHeader = ({ setIsEditing }) => {
 
     return (
         <Box>
-            <AppBar position="static" sx={{boxShadow:'none', bgcolor:'#fff', color:'#000',}}>
+            <AppBar position="static" sx={{boxShadow:'none', bgcolor:'#fff', color:'#000', borderBottom:'1px solid #0000001a'}}>
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         # {channel.data.name}
