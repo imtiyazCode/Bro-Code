@@ -1,6 +1,6 @@
 import React from 'react';
 import { useChatContext, Channel, MessageTeam } from 'stream-chat-react';
-import { Box, styled } from '@mui/material';
+import { Box, styled, Modal } from '@mui/material';
 
 import { ChannelInner,CreateChannel, EditChannel } from './'
 
@@ -10,23 +10,9 @@ const ChannelContainerWraper = styled(Box)(()=>({
   width:' 100%'
 }))
 
-const ChannelContainer = ({ isCreating, isEditing, setIsCreating, setIsEditing, createType }) => {
+const ChannelContainer = ({isCreating, setIsCreating, createType}) => {
 
-  if (isCreating) {
-    return (
-      <ChannelContainerWraper >
-        <CreateChannel createType={createType} setIsCreating={setIsCreating} />
-      </ChannelContainerWraper>
-    )
-  }
-
-  if (isEditing) {
-    return (
-      <ChannelContainerWraper className="channel_container">
-        <EditChannel setIsEditing={setIsEditing} />
-      </ChannelContainerWraper>
-    )
-  }
+  const handleClose = () => setIsCreating(false);
 
   const EmptyState = () =>{
     <div className="channel-empty_container">
@@ -40,8 +26,16 @@ const ChannelContainer = ({ isCreating, isEditing, setIsCreating, setIsEditing, 
       <Channel EmptyStateIndicator={EmptyState}
         Message={(messageProps, i) => <MessageTeam key={i} {...messageProps} />}
       >
-        <ChannelInner setIsEditing={setIsEditing} />
+        <ChannelInner />
       </Channel>
+      <Modal
+        open={isCreating}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <CreateChannel createType={createType} setIsCreating={setIsCreating} />
+      </Modal>
     </ChannelContainerWraper>
   )
 }

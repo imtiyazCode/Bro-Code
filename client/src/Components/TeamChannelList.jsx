@@ -17,7 +17,13 @@ const ContainerBox = styled(Box)(() =>({
     backgroundColor: '005fff'
 }))
 
-const TeamChannelList = ({ setToggleContainer, children, error = false, loading, type, isCreating, setIsCreating, setIsEditing, setCreateType }) => {
+const TeamChannelList = ({ children, error = false, loading, type, setIsCreating, setCreateType }) => {
+
+    const handleCreateClick = () =>{
+        type = type == "team" ? 'team' : 'messaging'
+        setCreateType(type);
+        setIsCreating(true);
+    }
 
     if (error) {
         return type === 'team' ? (
@@ -45,7 +51,7 @@ const TeamChannelList = ({ setToggleContainer, children, error = false, loading,
                 <HeaderTypography>
                     {type === 'team' ? 'Channels' : ' Direct Messages'}
                 </HeaderTypography>
-                <AiOutlinePlusCircle color='#fff'/>
+                <AiOutlinePlusCircle color='#fff' cursor={'pointer'} onClick={handleCreateClick}/>
             </Box>
             {children}
         </ContainerBox>

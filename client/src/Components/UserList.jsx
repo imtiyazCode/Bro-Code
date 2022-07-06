@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 import { Box, styled, Typography } from '@mui/material';
-import { FaUserPlus } from 'react-icons/fa'
+import { FaUserPlus, FaUserMinus } from 'react-icons/fa'
 
 const UserListContainer = styled(Box)(() => ({
     display: 'flex',
@@ -12,7 +12,7 @@ const UserListContainer = styled(Box)(() => ({
 const HeaderContainer = styled(Box)(() => ({
     display: 'flex',
     alignItems: 'center',
-    margin: '0px 20px',
+    margin: '10px 20px',
     justifyContent: 'space-between',
 }))
 
@@ -26,7 +26,7 @@ const UserListMessage = styled(Box)(() => ({
 const UserItemContainer = styled(Box)(() => ({
     display: 'flex',
     alignItems: 'center',
-    margin: '0px 20px',
+    padding: '10px 20px',
     justifyContent: 'space-between',
     "&:hover": {
         background: '#f7f6f8',
@@ -34,20 +34,13 @@ const UserItemContainer = styled(Box)(() => ({
     }
 }))
 
-const EmptyBox = styled(Box)(() => ({
-    height: '28px',
-    width: '28px',
-    background: '#f7f6f8',
-    border: '1px solid #dedddf',
-    borderRadius: '14px',
-    boxSizing: 'border-box',
-    marginLeft: '2px',
-}))
 const ListContainer = ({ children }) => (
     <UserListContainer>
         <HeaderContainer>
-            {children}
+            <p>User</p>
+            <p>Invite</p>
         </HeaderContainer>
+        {children}
     </UserListContainer>
 )
 
@@ -71,7 +64,7 @@ const UserItem = ({ user, setSelectedUsers }) => {
                 <Avatar image={user.image} name={user.fullName || user.id} size={32} />
                 <Typography variant='subtitle1' component='p' sx={{ fontWeight: '500' }}>{user.fullName || user.id}</Typography>
             </Box>
-            {selected ? <FaUserPlus /> : <EmptyBox></EmptyBox>}
+            {selected ? <FaUserMinus height={28} width={28} /> : <FaUserPlus height={28} width={28} color='#787878 '/>}
         </UserItemContainer>
     )
 
@@ -98,7 +91,7 @@ const UserList = ({ setSelectedUsers }) => {
                 );
 
                 if (response.users.length) {
-                    setUsers(response.user);
+                    setUsers(response.users);
                 } else {
                     setListEmpty(true);
                 }
@@ -136,13 +129,13 @@ const UserList = ({ setSelectedUsers }) => {
 
     return (
         <ListContainer>
-            {loading
-                ? <UserListMessage>
+            {loading ?
+                <UserListMessage>
                     Loading Users...
                 </UserListMessage>
                 : (
-                    users.map((user, i) => (
-                        <UserItem index={i} key={user.id} user setSelectedUsers />
+                    users?.map((user, i) => (
+                        <UserItem index={i} key={user.id} user={user} setSelectedUsers={setSelectedUsers} />
                     ))
                 )}
         </ListContainer>

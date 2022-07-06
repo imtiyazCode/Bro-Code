@@ -44,6 +44,10 @@ const theme = createTheme({
 
 const App = () => {
 
+  const [createType, setCreateType] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
   if (!authToken) return <Auth />
 
   return (
@@ -52,10 +56,17 @@ const App = () => {
         <Chat client={chatClient}>
           <Grid container height='100%'>
             <Grid item xs={0} md='auto' height='100%'>
-              <ChannelListContainer />
+              <ChannelListContainer 
+                setIsCreating={setIsCreating}
+                setCreateType={setCreateType}
+              />
             </Grid>
             <Grid item xs={12} md height='100%'>
-              <ChannelContainer />
+              <ChannelContainer
+                setIsCreating={setIsCreating}
+                isCreating={isCreating}
+                createType={createType}
+              />
             </Grid>
           </Grid>
         </Chat>
