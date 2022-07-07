@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { ChannelList, useChatContext } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
-import { List, ListItem, ListItemAvatar, Avatar } from '@mui/material';
+import { List, ListItem, ListItemAvatar, Avatar, Drawer, IconButton } from '@mui/material';
 
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
 import { FaLaptopCode } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
+import {AiOutlineMenuFold} from 'react-icons/ai'
 
 const cookies = new Cookies();
 
@@ -28,11 +29,25 @@ const Sidebar = ({ logout }) => (
     </List>
 );
 
-const CompanyHeader = () => (
+const CompanyHeader = ({setOpenDrawer}) => {
+    const handleDrawerClose = () => {
+        setOpenDrawer(false);
+    };
+    
+    return (
     <div className="channel-list__header">
         <p className="channel-list__header__text">Bro Code</p>
+        <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerClose}
+            edge="start"
+            sx={{ mr: 2, display: { sm: 'flex', md: 'none' } }}
+        >
+            <AiOutlineMenuFold color='#fff'/>
+        </IconButton>
     </div>
-)
+)}
 
 const customChannelTeamFilter = (channels) => {
     return channels.filter((channel) => channel.type === 'team');
@@ -42,7 +57,7 @@ const customChannelMessagingFilter = (channels) => {
     return channels.filter((channel) => channel.type === 'messaging');
 }
 
-const ChannelListContent = ({ setIsCreating, setCreateType }) => {
+const ChannelListContent = ({ setIsCreating, setCreateType, setOpenDrawer }) => {
     const { client } = useChatContext();
 
     const logout = () => {
@@ -63,7 +78,7 @@ const ChannelListContent = ({ setIsCreating, setCreateType }) => {
         <>
             <Sidebar logout={logout} />
             <div className="channel-list__list__wrapper">
-                <CompanyHeader />
+                <CompanyHeader setOpenDrawer={setOpenDrawer}/>
                 <ChannelSearch />
                 <ChannelList
                     filters={filters}
@@ -80,6 +95,7 @@ const ChannelListContent = ({ setIsCreating, setCreateType }) => {
                         <TeamChannelPreview
                             {...previewProps}
                             type="team"
+                            setOpenDrawer={setOpenDrawer}
                         />
                     )}
                 />
@@ -98,6 +114,7 @@ const ChannelListContent = ({ setIsCreating, setCreateType }) => {
                         <TeamChannelPreview
                             {...previewProps}
                             type="messaging"
+                            setOpenDrawer={setOpenDrawer}
                         />
                     )}
                 />
@@ -106,8 +123,7 @@ const ChannelListContent = ({ setIsCreating, setCreateType }) => {
     );
 }
 
-const ChannelListContainer = ({ setIsCreating, setCreateType }) => {
-    const [toggleContainer, setToggleContainer] = useState(false);
+const ChannelListContainer = ({ setIsCreating, setCreateType, openDrawer, setOpenDrawer }) => {
 
     return (
         <>
@@ -115,12 +131,17 @@ const ChannelListContainer = ({ setIsCreating, setCreateType }) => {
                 <ChannelListContent setIsCreating={setIsCreating} setCreateType={setCreateType} />
             </div>
 
-            <div className="channel-list__container-responsive"
-                style={{ left: toggleContainer ? "0%" : "-89%", backgroundColor: "#005fff" }}
-            >
-                <div className="channel-list__container-toggle" >
-                </div>
-                <ChannelListContent setIsCreating={setIsCreating} setCreateType={setCreateType} />
+
+            <div className="channel-list__drawer-responsive">
+                <Drawer 
+                    variant='persistent'
+                    anchor="left"
+                    open={openDrawer}
+                >
+                    <div className="channel-list__container-responsive">
+                        <ChannelListContent setIsCreating={setIsCreating} setCreateType={setCreateType} setOpenDrawer={setOpenDrawer} />
+                    </div>
+                </Drawer>
             </div>
         </>
     )

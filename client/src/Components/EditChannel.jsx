@@ -64,7 +64,7 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
   )
 }
 
-const EditChannel = ({ setIsEditing }) => {
+const EditChannel = ({ setIsEditing, setOpenDrawer }) => {
   const { channel } = useChatContext();
   const [channelName, setChannelName] = useState(channel?.data?.name);
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -84,10 +84,12 @@ const EditChannel = ({ setIsEditing }) => {
     setChannelName(null);
     setIsEditing(false);
     setSelectedUsers([]);
+    setOpenDrawer(false);
   }
 
   const closeHandler = () => {
     setIsEditing(false);
+    setOpenDrawer(false);
   }
 
   return (

@@ -47,6 +47,7 @@ const App = () => {
   const [createType, setCreateType] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   if (!authToken) return <Auth />
 
@@ -59,6 +60,8 @@ const App = () => {
               <ChannelListContainer 
                 setIsCreating={setIsCreating}
                 setCreateType={setCreateType}
+                openDrawer={openDrawer}
+                setOpenDrawer={setOpenDrawer}
               />
             </Grid>
             <Grid item xs={12} md height='100%'>
@@ -68,6 +71,8 @@ const App = () => {
                 createType={createType}
                 isEditing={isEditing}
                 setIsEditing={setIsEditing}
+                openDrawer={openDrawer}
+                setOpenDrawer={setOpenDrawer}
               />
             </Grid>
           </Grid>

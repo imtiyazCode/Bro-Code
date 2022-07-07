@@ -16,7 +16,7 @@ const PreviewBox = styled(Box)(() => ({
     marginRight:'12px' 
 }))
 
-const TeamChannelPreview = ({channel, type }) => {
+const TeamChannelPreview = ({channel, type, setOpenDrawer }) => {
     const { channel: activeChannel, client, setActiveChannel } = useChatContext();
 
     const ChannelPreview = () => (
@@ -45,7 +45,10 @@ const TeamChannelPreview = ({channel, type }) => {
                 ? 'channel-preview_container_selected'
                 : 'channel-preview_container'
             }
-            onClick={()=> setActiveChannel(channel)}
+            onClick={()=> {
+                setActiveChannel(channel)
+                setOpenDrawer(false)
+            }}
         >
             {type === "team" ? <ChannelPreview /> : <DirectPreview />}
         </div>

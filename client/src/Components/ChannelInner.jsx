@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { MessageList, MessageInput, Thread, Window, useChannelActionContext, Avatar, useChannelStateContext, useChatContext } from 'stream-chat-react';
 import { Box, Toolbar, AppBar, IconButton, Typography, Button } from '@mui/material'
 
-import { AiFillInfoCircle } from 'react-icons/ai'
+import { AiFillInfoCircle, AiOutlineMenuUnfold } from 'react-icons/ai';
 
 export const GiphyContext = React.createContext({});
 
-const ChannelInner = ({ setIsEditing }) => {
+const ChannelInner = ({ setIsEditing, openDrawer, setOpenDrawer }) => {
     const [giphyState, setGiphyState] = useState(false);
     const { sendMessage } = useChannelActionContext();
 
@@ -33,7 +33,7 @@ const ChannelInner = ({ setIsEditing }) => {
         <GiphyContext.Provider value={{ giphyState, setGiphyState }}>
             <div style={{ display: 'flex', width: '100%' }}>
                 <Window>
-                    <TeamChannelHeader setIsEditing={setIsEditing} />
+                    <TeamChannelHeader setIsEditing={setIsEditing} openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
                     <MessageList />
                     <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
                 </Window>
@@ -43,9 +43,13 @@ const ChannelInner = ({ setIsEditing }) => {
     );
 };
 
-const TeamChannelHeader = ({ setIsEditing }) => {
+const TeamChannelHeader = ({ setIsEditing, setOpenDrawer }) => {
     const { channel, watcher_count } = useChannelStateContext();
     const { client } = useChatContext();
+
+    const handleDrawerOpen = () => {
+        setOpenDrawer(true);
+    };
 
     const getWatcherText = (watchers) => {
         if (!watchers) return 'No users online';
@@ -56,7 +60,7 @@ const TeamChannelHeader = ({ setIsEditing }) => {
 
     const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
 
-    const handleClick = () => {
+    const handleEditClick = () => {
         setIsEditing(true);
     }
 
@@ -66,6 +70,15 @@ const TeamChannelHeader = ({ setIsEditing }) => {
                 {members.map(({ user }, i) => (
                     <AppBar position="static" sx={{ bgcolor: '#fff', color: '#000', borderBottom: '1px solid #0000001a', boxShadow: 'none' }} >
                         <Toolbar>
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={handleDrawerOpen}
+                                edge="start"
+                                sx={{ mr: 2, display: { sm: 'flex', md: 'none' } }}
+                            >
+                                <AiOutlineMenuUnfold />
+                            </IconButton>
                             <IconButton
                                 size="large"
                                 edge="start"
@@ -88,11 +101,20 @@ const TeamChannelHeader = ({ setIsEditing }) => {
         <Box>
             <AppBar position="static" sx={{ boxShadow: 'none', bgcolor: '#fff', color: '#000', borderBottom: '1px solid #0000001a' }}>
                 <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        sx={{ mr: 2, display: { sm: 'flex', md: 'none' } }}
+                    >
+                        <AiOutlineMenuUnfold />
+                    </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         # {channel.data.name}
                     </Typography>
                     <Typography color="inherit">{getWatcherText(watcher_count)}</Typography>
-                    <Button color="inherit" onClick={handleClick}> <AiFillInfoCircle style={{ height: '25px', width: '25px' }} /></Button>
+                    <Button color="inherit" onClick={handleEditClick}> <AiFillInfoCircle style={{ height: '25px', width: '25px' }} /></Button>
                 </Toolbar>
             </AppBar>
         </Box>

@@ -67,7 +67,7 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
   )
 }
 
-const CreateChannel = ({ createType, setIsCreating }) => {
+const CreateChannel = ({ createType, setIsCreating, setOpenDrawer }) => {
   const { client, setActiveChannel } = useChatContext();
 
   const [channelName, setChannelName] = useState('')
@@ -75,6 +75,7 @@ const CreateChannel = ({ createType, setIsCreating }) => {
 
   const closeHandler = () => {
     setIsCreating(false);
+    setOpenDrawer(false);
   }
 
   const createChannel = async (e) => {
@@ -91,6 +92,7 @@ const CreateChannel = ({ createType, setIsCreating }) => {
       setIsCreating(false);
       setSelectedUsers([client.userID]);
       setActiveChannel(newChannel);
+      setOpenDrawer(false)
     } catch (error) {
       console.log(error);
     }

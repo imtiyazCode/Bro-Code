@@ -9,7 +9,7 @@ const ChannelContainerWraper = styled(Box)(()=>({
   width:' 100%'
 }))
 
-const ChannelContainer = ({isCreating, setIsCreating, createType,isEditing, setIsEditing}) => {
+const ChannelContainer = ({isCreating, setIsCreating, createType,isEditing, setIsEditing, openDrawer, setOpenDrawer}) => {
 
   const handleCreateClose = () => setIsCreating(false);
   const handleEditClose = () => setIsEditing(false);
@@ -26,7 +26,7 @@ const ChannelContainer = ({isCreating, setIsCreating, createType,isEditing, setI
       <Channel EmptyStateIndicator={EmptyState}
         Message={(messageProps, i) => <MessageTeam key={i} {...messageProps} />}
       >
-        <ChannelInner setIsEditing={setIsEditing} />
+        <ChannelInner setIsEditing={setIsEditing} openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
       </Channel>
 
       {/*  Modal for Create Channel */}
@@ -36,7 +36,7 @@ const ChannelContainer = ({isCreating, setIsCreating, createType,isEditing, setI
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <CreateChannel createType={createType} setIsCreating={setIsCreating} />
+        <CreateChannel createType={createType} setIsCreating={setIsCreating} setOpenDrawer={setOpenDrawer} />
       </Modal>
 
       {/* modal for edit channel */}
@@ -46,7 +46,7 @@ const ChannelContainer = ({isCreating, setIsCreating, createType,isEditing, setI
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <EditChannel setIsEditing={setIsEditing} />
+        <EditChannel setIsEditing={setIsEditing} setOpenDrawer={setOpenDrawer} />
       </Modal>
     </ChannelContainerWraper>
   )
