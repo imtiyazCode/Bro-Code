@@ -15,6 +15,7 @@ const style = {
   boxShadow: 24,
   borderRadius:5,
   height: 600,
+  width: { xs: '85%',sm: '65%', md: 500},
 };
 
 const buttonStyle = {

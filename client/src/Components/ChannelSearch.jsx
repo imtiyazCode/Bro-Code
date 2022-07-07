@@ -8,30 +8,30 @@ import { ResultDropdown } from './'
 const ChannelSearch = () => {
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
-    
+
     const [teamChannels, setTeamChannels] = useState([]);
     const [directChannels, setDirectChannels] = useState([]);
 
     const { client, setActiveChannel } = useChatContext();
 
     useEffect(() => {
-        if(!query){
+        if (!query) {
             setTeamChannels([]);
             setDirectChannels([]);
         }
     }, [query])
 
-    const getChannel = async(text) =>{
+    const getChannel = async (text) => {
         try {
             const channelResponses = await client.queryChannels({
                 type: 'team',
-                name: {$autocomplete: text},
-                members: {$in: [client.userID]}
-            })
+                name: { $autocomplete: text },
+                members: { $in: [client.userID] }
+            });
             const userResponses = await client.queryUsers({
                 id: { $ne: client.userID },
                 name: { $autocomplete: text }
-            })
+            });
             const [channels, { users }] = await Promise.all([channelResponses, userResponses]);
 
             if (channels.length) setTeamChannels(channels);
@@ -58,7 +58,7 @@ const ChannelSearch = () => {
     }
 
     return (
-        <div style={{paddingTop:'16px', borderTop:"1px solid #00000033"}}>
+        <div style={{ paddingTop: '16px', borderTop: "1px solid #00000033" }}>
             <Box sx={{ margin: '4px', bgcolor: '#ffffff33', borderRadius: '5px' }}>
                 <TextField
                     id="outlined-start-adornment"
@@ -68,7 +68,7 @@ const ChannelSearch = () => {
                     onChange={onSearch}
                     placeholder={"Search..."}
                     sx={{
-                        '& #outlined-start-adornment':{
+                        '& #outlined-start-adornment': {
                             color: '#ffffff'
                         }
                     }}
@@ -82,6 +82,8 @@ const ChannelSearch = () => {
                     teamChannels={teamChannels}
                     directChannels={directChannels}
                     loading={loading}
+                    setChannel={setChannel}
+                    setQuery={setQuery}
                 />
             )}
         </div>
