@@ -30,7 +30,7 @@ const style = {
   boxShadow: 24,
   borderRadius: 5,
   height: 600,
-  width: { xs: '85%',sm: '65%', md: 500},
+  width: { xs: '85%', sm: '65%', md: 500 },
 };
 
 const buttonStyle = {
@@ -97,12 +97,12 @@ const EditChannel = ({ setIsEditing, setOpenDrawer }) => {
       <Box display='flex' flexDirection='column' height='100%'>
         <HeaderBox>
           <Typography>Edit Channel</Typography>
-          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px', color:'#5D23A4' }} />
+          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px', color: '#5D23A4' }} />
         </HeaderBox>
         <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />
         <UserList setSelectedUsers={setSelectedUsers} />
         <div style={buttonStyle} onClick={updateChannel}>
-          <Typography variant="button" sx={{cursor:'pointer'}} >Save Changes</Typography>
+          <Typography variant="button" sx={{ cursor: 'pointer' }} >Save Changes</Typography>
         </div>
       </Box>
     </Box>

@@ -109,8 +109,8 @@ const SearchResult = ({ channel, focusedId, type, setChannel }) => {
                 </SearchResultFocused>
             ) : (
                 <SearchResultNFocused onClick={async () => {
-                        channelByUser({ client, setActiveChannel, channel, setChannel })
-                    }} >
+                    channelByUser({ client, setActiveChannel, channel, setChannel })
+                }} >
                     <Box display='flex' alignItems='center' margin='5px 0 5px 20px' >
                         <AvatarImage image={channel.image || undefined} name={channel.name} size={24} />
                         <ResultTypo>{channel.name}</ResultTypo>

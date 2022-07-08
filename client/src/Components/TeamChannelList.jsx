@@ -10,16 +10,16 @@ const HeaderTypography = styled(Typography)(() => ({
     color: 'rgba(255, 255, 255, 0.66)'
 }))
 
-const ContainerBox = styled(Box)(() =>({
-    display:'flex',
-    flexDirection:'column',
-    width:'100%',
+const ContainerBox = styled(Box)(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
     backgroundColor: '005fff'
 }))
 
 const TeamChannelList = ({ children, error = false, loading, type, setIsCreating, setCreateType }) => {
 
-    const handleCreateClick = () =>{
+    const handleCreateClick = () => {
         type = type == "team" ? 'team' : 'messaging'
         setCreateType(type);
         setIsCreating(true);
@@ -51,7 +51,7 @@ const TeamChannelList = ({ children, error = false, loading, type, setIsCreating
                 <HeaderTypography>
                     {type === 'team' ? 'Channels' : ' Direct Messages'}
                 </HeaderTypography>
-                <AiOutlinePlusCircle color='#fff' cursor={'pointer'} onClick={handleCreateClick}/>
+                <AiOutlinePlusCircle color='#fff' cursor={'pointer'} onClick={handleCreateClick} />
             </Box>
             {children}
         </ContainerBox>

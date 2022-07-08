@@ -58,7 +58,7 @@ const ChannelSearch = () => {
     }
 
     return (
-        <div style={{ paddingTop: '16px', borderTop: "1px solid #00000033", zIndex:'100000' }}>
+        <div style={{ paddingTop: '16px', borderTop: "1px solid #00000033", zIndex: '100000' }}>
             <Box sx={{ margin: '4px', bgcolor: '#ffffff33', borderRadius: '5px' }}>
                 <TextField
                     id="outlined-start-adornment"

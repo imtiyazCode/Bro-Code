@@ -64,7 +64,7 @@ const UserItem = ({ user, setSelectedUsers }) => {
                 <Avatar image={user.image} name={user.fullName || user.id} size={32} />
                 <Typography variant='subtitle1' component='p' sx={{ fontWeight: '500' }}>{user.fullName || user.id}</Typography>
             </Box>
-            {selected ? <FaUserMinus height={28} width={28} /> : <FaUserPlus height={28} width={28} color='#787878 '/>}
+            {selected ? <FaUserMinus height={28} width={28} /> : <FaUserPlus height={28} width={28} color='#787878 ' />}
         </UserItemContainer>
     )
 

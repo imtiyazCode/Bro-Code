@@ -13,10 +13,10 @@ const PreviewBox = styled(Box)(() => ({
     width: '100%',
     textOverflow: 'ellipsis',
     wordBreak: 'break-all',
-    marginRight:'12px' 
+    marginRight: '12px'
 }))
 
-const TeamChannelPreview = ({channel, type, setOpenDrawer }) => {
+const TeamChannelPreview = ({ channel, type, setOpenDrawer }) => {
     const { channel: activeChannel, client, setActiveChannel } = useChatContext();
 
     const ChannelPreview = () => (
@@ -44,8 +44,8 @@ const TeamChannelPreview = ({channel, type, setOpenDrawer }) => {
             channel?.id === activeChannel?.id
                 ? 'channel-preview_container_selected'
                 : 'channel-preview_container'
-            }
-            onClick={()=> {
+        }
+            onClick={() => {
                 setActiveChannel(channel)
                 setOpenDrawer(false)
             }}

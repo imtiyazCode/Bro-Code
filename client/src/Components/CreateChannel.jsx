@@ -13,9 +13,9 @@ const style = {
   transform: 'translate(-50%, -50%)',
   bgcolor: 'background.paper',
   boxShadow: 24,
-  borderRadius:5,
+  borderRadius: 5,
   height: 600,
-  width: { xs: '85%',sm: '65%', md: 500},
+  width: { xs: '85%', sm: '65%', md: 500 },
 };
 
 const buttonStyle = {
@@ -105,12 +105,12 @@ const CreateChannel = ({ createType, setIsCreating, setOpenDrawer }) => {
       <Box display='flex' flexDirection='column' height='100%'>
         <HeaderBox>
           <Typography>{createType === 'team' ? 'Create a New Channel' : 'Send Direct Message'}</Typography>
-          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px', color:'#5D23A4' }} />
+          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px', color: '#5D23A4' }} />
         </HeaderBox>
         {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />}
         <UserList setSelectedUsers={setSelectedUsers} />
         <div style={buttonStyle} onClick={createChannel}>
-          <Typography variant="button" sx={{cursor:'pointer'}} >{createType === 'team' ? 'Create Channel' : 'Create Message Group'}</Typography>
+          <Typography variant="button" sx={{ cursor: 'pointer' }} >{createType === 'team' ? 'Create Channel' : 'Create Message Group'}</Typography>
         </div>
       </Box>
     </Box>

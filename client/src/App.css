@@ -1,4 +1,4 @@
-:root{
+:root {
   --primary-color: #8619FF !important;
 }
 
@@ -15,22 +15,6 @@ body {
 
 .App {
   height: 100%;
-}
-
-.str-chat-channel.messaging .str-chat__main-panel {
-  padding: 0;
-}
-
-.str-chat.messaging,
-.str-chat.commerce {
-  background-color: transparent !important;
-}
-
-.str-chat-channel.messaging .str-chat__main-panel {
-  padding: 0 !important;
-}
-.str-chat__send-button svg path{
-  fill: var(--primary-color) !important;
 }
 
 .channel-preview_container {
@@ -59,6 +43,23 @@ body {
   font-weight: bold;
   margin-right: 16px;
   cursor: pointer;
+}
+
+.str-chat-channel.messaging .str-chat__main-panel {
+  padding: 0;
+}
+
+.str-chat.messaging,
+.str-chat.commerce {
+  background-color: transparent !important;
+}
+
+.str-chat-channel.messaging .str-chat__main-panel {
+  padding: 0 !important;
+}
+
+.str-chat__send-button svg path {
+  fill: var(--primary-color) !important;
 }
 
 @media screen and (max-width: 960px) {

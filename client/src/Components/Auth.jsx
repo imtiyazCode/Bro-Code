@@ -9,14 +9,14 @@ import signInImage from '../assets/signup.jpg'
 
 const cookies = new Cookies();
 
-const FormWrapper = styled(Box)(({theme})=>({
+const FormWrapper = styled(Box)(({ theme }) => ({
     display: 'flex',
     backgroundColor: theme.palette.primary.dark,
     alignItems: 'center',
     justifyContent: 'center'
 }))
 
-const PaperBox =styled(Paper)(()=>({
+const PaperBox = styled(Paper)(() => ({
     flex: 2,
     display: 'flex',
     flexDirection: 'column',
@@ -32,7 +32,7 @@ const headingStyle = {
     margin: '24px 0'
 }
 
-const SubmitButton = styled(Button)(({ theme })=>({
+const SubmitButton = styled(Button)(({ theme }) => ({
     border: '1px solid primary',
     fontFamily: 'Arial, Helvetica, sans-serif',
     fontWeight: '500',
@@ -69,6 +69,7 @@ const Auth = () => {
         e.preventDefault();
         const { username, phoneNumber, avatarURL, password } = form;
         console.log('Submit');
+        //  for local host server
         const URL = 'http://localhost:5001/auth';
 
         const responseData = await axios.post(`${URL}/${isSignUp ? 'signup' : 'login'}`, {
@@ -97,7 +98,7 @@ const Auth = () => {
     return (
         <Grid container sx={{ height: '100vh' }}>
             <Grid item md={5}>
-                <FormWrapper  sx={{ height: 'calc(100% - 4rem)', padding: { xs: '2rem 0.5rem',sm: '2rem'}}}>
+                <FormWrapper sx={{ height: 'calc(100% - 4rem)', padding: { xs: '2rem 0.5rem', sm: '2rem' } }}>
                     <PaperBox >
                         <Typography variant="h5" component="p" sx={headingStyle}>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
 
@@ -181,14 +182,14 @@ const Auth = () => {
                             </div>
                         </form>
                         <Typography variant="subtitle2" sx={{ marginTop: '1rem' }} component="p">
-                            {isSignUp 
-                                ? "Already have an account?" 
+                            {isSignUp
+                                ? "Already have an account?"
                                 : "Don't have an account?"
                             }
                             <span onClick={switchMode}
                                 style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: 900, color: '#2F0662', cursor: 'pointer' }}>
                                 {isSignUp
-                                    ? ' Sign In' 
+                                    ? ' Sign In'
                                     : ' Sign Up'
                                 }
                             </span>
