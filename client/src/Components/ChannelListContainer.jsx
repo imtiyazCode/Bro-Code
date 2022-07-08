@@ -1,27 +1,53 @@
 import React, { useState } from 'react';
 import { ChannelList, useChatContext } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
-import { List, ListItem, ListItemAvatar, Avatar, Drawer, IconButton } from '@mui/material';
+import { List, ListItem, ListItemAvatar, Avatar, Drawer, IconButton, Box, styled } from '@mui/material';
 
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
 import { FaLaptopCode } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
-import {AiOutlineMenuFold} from 'react-icons/ai'
+import { AiOutlineMenuFold } from 'react-icons/ai'
 
 const cookies = new Cookies();
 
+const headerText = {
+    fontFamily: 'Helvetica Neue, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '18px',
+    lineHeight: '28px',
+    color: '#ffffff',
+}
+
+const headerStyle = {
+    paddingLeft: '16px',
+    height: '64px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+}
+
+const drawerStyle = {
+    display: { xs: 'flex', md: 'none' },
+    height: '100%',
+    boxShadow: 'inset 1px 0px 0px rgba(0, 0, 0, 0.1)',
+    top: '0%',
+    zIndex: '5',
+    transition: '0.8s ease'
+}
+
 const Sidebar = ({ logout }) => (
-    <List sx={{ width: '72px', bgcolor: '#0048c5', height: '100vh', padding: '0' }} >
+    <List sx={{ width: '72px', bgcolor: 'primary.dark', height: '100vh', padding: '0' }} >
         <ListItem sx={{ paddingTop: '12px' }}>
             <ListItemAvatar>
-                <Avatar sx={{ bgcolor: '#ffffff', width: 44, height: 44, color: '#000', cursor: 'pointer' }}>
+                <Avatar sx={{ bgcolor: 'primary.main', width: 44, height: 44, color: 'white.main', cursor: 'pointer' }}>
                     <FaLaptopCode />
                 </Avatar>
             </ListItemAvatar>
         </ListItem>
         <ListItem>
             <ListItemAvatar>
-                <Avatar sx={{ bgcolor: '#ffffff', width: 44, height: 44, color: '#000', cursor: 'pointer' }} onClick={logout}>
+                <Avatar sx={{ bgcolor: 'primary.main', width: 44, height: 44, color: 'white.main', cursor: 'pointer' }} onClick={logout}>
                     <FiLogOut />
                 </Avatar>
             </ListItemAvatar>
@@ -29,25 +55,26 @@ const Sidebar = ({ logout }) => (
     </List>
 );
 
-const CompanyHeader = ({setOpenDrawer}) => {
+const CompanyHeader = ({ setOpenDrawer }) => {
     const handleDrawerClose = () => {
         setOpenDrawer(false);
     };
-    
+
     return (
-    <div className="channel-list__header">
-        <p className="channel-list__header__text">Bro Code</p>
-        <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerClose}
-            edge="start"
-            sx={{ mr: 2, display: { sm: 'flex', md: 'none' } }}
-        >
-            <AiOutlineMenuFold color='#fff'/>
-        </IconButton>
-    </div>
-)}
+        <Box style={headerStyle}>
+            <p style={headerText}>Bro Code</p>
+            <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerClose}
+                edge="start"
+                sx={{ mr: 2, display: { sm: 'flex', md: 'none' } }}
+            >
+                <AiOutlineMenuFold color='#fff' />
+            </IconButton>
+        </Box>
+    )
+}
 
 const customChannelTeamFilter = (channels) => {
     return channels.filter((channel) => channel.type === 'team');
@@ -77,8 +104,8 @@ const ChannelListContent = ({ setIsCreating, setCreateType, setOpenDrawer }) => 
     return (
         <>
             <Sidebar logout={logout} />
-            <div className="channel-list__list__wrapper">
-                <CompanyHeader setOpenDrawer={setOpenDrawer}/>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: '240px', bgcolor: 'primary.main' }} >
+                <CompanyHeader setOpenDrawer={setOpenDrawer} />
                 <ChannelSearch />
                 <ChannelList
                     filters={filters}
@@ -118,7 +145,7 @@ const ChannelListContent = ({ setIsCreating, setCreateType, setOpenDrawer }) => 
                         />
                     )}
                 />
-            </div>
+            </Box>
         </>
     );
 }
@@ -127,22 +154,15 @@ const ChannelListContainer = ({ setIsCreating, setCreateType, openDrawer, setOpe
 
     return (
         <>
-            <div className="channel-list__container">
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, height: '100%', boxShadow: 'inset 1px 0px 0px #0000001a' }} >
                 <ChannelListContent setIsCreating={setIsCreating} setCreateType={setCreateType} />
-            </div>
+            </Box>
 
-
-            <div className="channel-list__drawer-responsive">
-                <Drawer 
-                    variant='persistent'
-                    anchor="left"
-                    open={openDrawer}
-                >
-                    <div className="channel-list__container-responsive">
-                        <ChannelListContent setIsCreating={setIsCreating} setCreateType={setCreateType} setOpenDrawer={setOpenDrawer} />
-                    </div>
-                </Drawer>
-            </div>
+            <Drawer variant='persistent' anchor="left" open={openDrawer} >
+                <Box sx={drawerStyle}>
+                    <ChannelListContent setIsCreating={setIsCreating} setCreateType={setCreateType} setOpenDrawer={setOpenDrawer} />
+                </Box>
+            </Drawer>
         </>
     )
 

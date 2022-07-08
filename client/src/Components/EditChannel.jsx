@@ -97,7 +97,7 @@ const EditChannel = ({ setIsEditing, setOpenDrawer }) => {
       <Box display='flex' flexDirection='column' height='100%'>
         <HeaderBox>
           <Typography>Edit Channel</Typography>
-          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px' }} />
+          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px', color:'#5D23A4' }} />
         </HeaderBox>
         <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />
         <UserList setSelectedUsers={setSelectedUsers} />

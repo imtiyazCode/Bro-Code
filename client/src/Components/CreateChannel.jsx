@@ -105,7 +105,7 @@ const CreateChannel = ({ createType, setIsCreating, setOpenDrawer }) => {
       <Box display='flex' flexDirection='column' height='100%'>
         <HeaderBox>
           <Typography>{createType === 'team' ? 'Create a New Channel' : 'Send Direct Message'}</Typography>
-          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px' }} />
+          <AiFillCloseCircle onClick={closeHandler} style={{ cursor: 'pointer', height: '25px', width: '25px', color:'#5D23A4' }} />
         </HeaderBox>
         {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />}
         <UserList setSelectedUsers={setSelectedUsers} />

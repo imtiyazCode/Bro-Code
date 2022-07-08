@@ -1,3 +1,7 @@
+:root{
+  --primary-color: #8619FF !important;
+}
+
 html,
 body {
   margin: 0;
@@ -25,49 +29,8 @@ body {
 .str-chat-channel.messaging .str-chat__main-panel {
   padding: 0 !important;
 }
-
-.channel-list__container {
-  display: flex;
-  height: 100%;
-  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
-}
-
-.channel-list__container-responsive {
-  display: none;
-  height: 100%;
-  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
-  top: 0%;
-  z-index: 5;
-  transition: 0.8s ease;
-}
-
-.channel-list__drawer-responsive {
-  display: none;
-  position: absolute;
-}
-
-.channel-list__header {
-  padding-left: 16px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.channel-list__header__text {
-  font-family: Helvetica Neue, sans-serif;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 28px;
-  color: #ffffff;
-}
-
-.channel-list__list__wrapper {
-  display: flex;
-  flex-direction: column;
-  background: var(--primary-color);
-  width: 240px;
+.str-chat__send-button svg path{
+  fill: var(--primary-color) !important;
 }
 
 .channel-preview_container {
@@ -106,19 +69,5 @@ body {
     position: relative !important;
     left: 0 !important;
     min-height: fit-content !important;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .channel-list__container {
-    display: none;
-  }
-
-  .channel-list__container-responsive {
-    display: flex;
-  }
-
-  .channel-list__drawer-responsive {
-    display: block;
   }
 }

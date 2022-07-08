@@ -114,7 +114,7 @@ const TeamChannelHeader = ({ setIsEditing, setOpenDrawer }) => {
                         # {channel.data.name}
                     </Typography>
                     <Typography color="inherit">{getWatcherText(watcher_count)}</Typography>
-                    <Button color="inherit" onClick={handleEditClick}> <AiFillInfoCircle style={{ height: '25px', width: '25px' }} /></Button>
+                    <Button color="inherit" onClick={handleEditClick}> <AiFillInfoCircle style={{ height: '25px', width: '25px', color:'#5D23A4' }} /></Button>
                 </Toolbar>
             </AppBar>
         </Box>

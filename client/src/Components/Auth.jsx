@@ -9,9 +9,9 @@ import signInImage from '../assets/signup.jpg'
 
 const cookies = new Cookies();
 
-const FormWrapper = styled(Box)(()=>({
+const FormWrapper = styled(Box)(({theme})=>({
     display: 'flex',
-    backgroundColor: '#005fff',
+    backgroundColor: theme.palette.primary.dark,
     alignItems: 'center',
     justifyContent: 'center'
 }))
@@ -25,14 +25,14 @@ const PaperBox =styled(Paper)(()=>({
 }))
 
 const headingStyle = {
-    color: '#05245a',
+    color: '#2F0662',
     fontSize: '1.5em',
     fontFamily: 'Arial, Helvetica, sans-serif',
     fontWeight: 900,
     margin: '24px 0'
 }
 
-const SubmitButton = styled(Button)(()=>({
+const SubmitButton = styled(Button)(({ theme })=>({
     border: '1px solid primary',
     fontFamily: 'Arial, Helvetica, sans-serif',
     fontWeight: '500',
@@ -41,7 +41,7 @@ const SubmitButton = styled(Button)(()=>({
     cursor: 'pointer',
     transition: '0.3s ease',
     color: '#fff',
-    backgroundColor:'#005fff',
+    backgroundColor: theme.palette.primary,
     marginTop: '1rem',
     boxShadow: 'none',
     borderRadius: '8px'
@@ -186,7 +186,7 @@ const Auth = () => {
                                 : "Don't have an account?"
                             }
                             <span onClick={switchMode}
-                                style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: 900, color: '#05245a', cursor: 'pointer' }}>
+                                style={{ fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: 900, color: '#2F0662', cursor: 'pointer' }}>
                                 {isSignUp
                                     ? ' Sign In' 
                                     : ' Sign Up'

@@ -29,12 +29,10 @@ if (authToken) {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#005fff',
-      darker: '#003ea7',
-    },
-    neutral: {
-      main: '#64748B',
-      contrastText: '#fff',
+      light:'#bf80ff',
+      main: '#8619FF',
+      dark: '#5D23A4',
+      darker: '#2F0662'
     },
     white: {
       main: '#ffffff'
@@ -49,7 +47,11 @@ const App = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  if (!authToken) return <Auth />
+  if (!authToken) return (
+    <ThemeProvider theme={theme}>
+      <Auth />
+    </ThemeProvider>
+  )
 
   return (
     <div className="App" >
